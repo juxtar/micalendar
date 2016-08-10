@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+
+.main-app {
+  height: calc(100vh - 56px);
+  margin: 0;
+}
+
+.day-tag {
+  flex-grow: 1;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  padding: 1rem 0;
+  color: #1a237e;
+}
+
+.add-icon {
+  position: absolute;
+  bottom: 12%;
+  right: 5%;
+}
+
+.app-navigation .material-icons {
+    margin-right: 32px;
+}
+
+.app-navigation .today {
+    font-weight: 600;
+}
+
+/*
+======= Main Content =======
+*/
+
+.contenedor {
+  margin: 0 2rem;
+  font-family: 'Muli', sans-serif;
+  display: flex;
+}
+
+.time-column,
+.activity-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-column {
+    font-size: 16px;
+}
+
+.activity-column {
+  flex-grow: 1;
+}
+
+.activity-collision-column {
+  display: flex;
+}
+
+.activity {
+  display: block;
+  text-align: center;
+  border-radius: .25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  background: #c5cae9;
+}
+
+.time {
+  width: 2.5em;
+  position: relative;
+  line-height: 0;
+}
+
+.time-stamp {
+  position: absolute;
+  font-size: .8em;
+  font-family: 'Nunito', sans-serif;
+  bottom: -.6em;
+  line-height: normal;
+}
+
+.t-5 {
+  height: 200px;
+}
+
+.t-3-25 {
+  height: 130px;
+}
+
+.t-2-5 {
+  height: 100px;
+}
+
+.t-1-75 {
+  height: 70px;
+}
+
+.t-1-5 {
+  height: 60px;
+}
+
+.t-0-75 {
+  height: 30px;
+}
+
+.empty {
+  background: url(../img/nada.png);
+  border-radius: 0;
+  border: white 1px solid;
+}
+
+.azul {
+  background: lightblue;
+}
+
+.amarillo {
+  background: wheat;
+}
+
+.rosadito {
+  background: plum;
+}
+
+@media (min-width:1023px) {
+  .main-app {
+    height: calc(100vh - 64px);
+  }
+}

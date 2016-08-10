@@ -1,0 +1,12 @@
+<div class="activity-column">
+  <ng-repeat ng-repeat="block in activityList">
+    <activity ng-if="!block.collision" info="block"></activity>
+    <div ng-if="block.collision" class="activity-collision-column">
+      <div class="activity-column" ng-repeat="column in block.activities">
+        <ng-repeat ng-repeat="activity in column">
+          <activity info="activity"></activity>
+        </ng-repeat>
+      </div>
+    </div>
+  </ng-repeat>
+</div>
