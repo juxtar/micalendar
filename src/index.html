@@ -7,24 +7,39 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli|Nunito">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-orange.min.css">
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
   </head>
-  <body>
-    
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button" ng-app="miCalendar">
+  <body ng-app="miCalendar">
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button" ng-controller="mainCtrl">
       <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
+        
+        <div class="mdl-layout__header-row header">
           <!-- Title -->
-          <span class="mdl-layout-title titulo">MiCalendar.io</span>
+          <span class="mdl-layout-title titulo">Miércoles</span>
+          <button id="demo-menu-lower-right"
+                  class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">arrow_drop_down</i>
+          </button>
+
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            for="demo-menu-lower-right">
+            <li class="mdl-menu__item">Lunes</li>
+            <li class="mdl-menu__item">Martes</li>
+            <li class="mdl-menu__item" disabled>Miércoles</li>
+            <li class="mdl-menu__item">Jueves</li>
+            <li class="mdl-menu__item">Viernes</li>
+          </ul>
+
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="">Usuario</a>
+            <a class="mdl-navigation__link" href="">Mis Actividades</a>
             <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">settings</i></a>
           </nav>
         </div>
@@ -32,11 +47,7 @@
       <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">MiCalendar.io</span>
         <nav class="mdl-navigation app-navigation">
-          <a class="mdl-navigation__link" href=""><i class="material-icons">date_range</i>Lunes</a>
-          <a class="mdl-navigation__link" href=""><i class="material-icons">date_range</i>Martes</a>
-          <a class="mdl-navigation__link today" href=""><i class="material-icons" role="presentation">today</i>Miércoles</a>
-          <a class="mdl-navigation__link" href=""><i class="material-icons">date_range</i>Jueves</a>
-          <a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href=""><i class="material-icons">date_range</i>Viernes</a>
+          <a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href=""><i class="material-icons">date_range</i>Mis Actividades</a>
           <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">settings</i>Configuración</a>
         </nav>
 
@@ -46,10 +57,8 @@
         <!--  Main App  -->
         <div class="main-app">
           
-          <span class="mdl-layout-title day-tag">Miércoles</span>
-          
           <!--   Contenedor   -->
-          <div class="contenedor" ng-controller="mainCtrl">
+          <div class="contenedor">
             <time-column info="tiemposprueba"></time-column>
             <activity-column info="prueba"></activity-column>
             
