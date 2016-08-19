@@ -48,7 +48,7 @@ controller("mainCtrl", function($scope, $mdSidenav){
             },
             {
               name: "Redes de Información",
-              duration: 2.5
+              duration: 3.25
             }
           ]
         ]
