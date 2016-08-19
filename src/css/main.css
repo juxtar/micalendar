@@ -2,18 +2,18 @@
   box-sizing: border-box;
 }
 
-.add-icon {
-  position: absolute;
-  bottom: 12%;
-  right: 5%;
+.day-tag {
+  cursor: pointer;
 }
 
-.app-navigation .material-icons {
-    margin-right: 32px;
+.contenedor {
+  padding-top: 1rem;
 }
 
-.main-app {
-  margin-top: 2em;
+.add-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
 }
 
 /*

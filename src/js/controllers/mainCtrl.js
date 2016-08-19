@@ -1,5 +1,17 @@
 angular.module("miCalendar").
-controller("mainCtrl", ['$scope', function($scope){
+controller("mainCtrl", function($scope, $mdSidenav){
+    
+    $scope.showToolbar = function(){
+        $mdSidenav("left").toggle();
+    }
+    
+    $scope.openMenu = function($mdOpenMenu, ev) {
+        originatorEv = ev;
+        $mdOpenMenu(ev);
+    };
+    
+    $scope.currentDay = "Miércoles";
+    $scope.days = ["Lunes",  "Martes",  "Miércoles",  "Jueves",  "Viernes"];
     $scope.prueba = [
       {
         name: "",
@@ -73,4 +85,4 @@ controller("mainCtrl", ['$scope', function($scope){
             duration: 1.5
         },
     ]
-}])
+})
