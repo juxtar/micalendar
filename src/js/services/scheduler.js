@@ -278,7 +278,7 @@ factory("scheduler", function(){
 		        parsedList.push(withCollision);
 		    }
 		}
-		return parsedList;
+		return [timeColumn, parsedList];
 	}
 
 	return parseActivities;
