@@ -83,6 +83,36 @@ factory("scheduler", function(){
 	    return horasFinal - horasInicial + minutosFinal/60 - minutosInicial/60;
 	}
 
+	function getTimes(list){
+		var timeList = new Set();
+
+		for (var i=0; i<list.length; i++){
+			if(list[i].name){
+				timeList.add(list[i].timeInit);
+				timeList.add(list[i].timeEnd);
+			}
+		}
+		return timeList;
+	}
+
+
+	function createTimeColumn(list){
+		var timeColumn = [];
+
+		timeColumn.push(new Timestamp(list[0], 0));
+
+		for(var j=1; j<list.length; j++){
+			var dur = substractTimestamps(list[j-1], list[j]);
+			timeColumn.push(new Timestamp(list[j], dur));
+		}
+		return timeColumn;
+	}
+
+
+	function Timestamp(label, duration){
+		this.label = label;
+		this.duration = duration;
+	}
 
 	function Blank(init, end, col){
 	    this.name = "";
@@ -227,8 +257,11 @@ factory("scheduler", function(){
 		var parsedList = [];
 
 		var auxList = parseSchedules(activityList);
-    auxList = auxList.filter(dayFilter(day)).sort(timeSort);
+    	auxList = auxList.filter(dayFilter(day)).sort(timeSort);
 		auxList.forEach(isColliding);
+
+		var timeColumn = createTimeColumn(Array.from(getTimes(auxList)).sort());
+
 		while(auxList.length){
 
 		    var temp = filterNoCollision(auxList, parsedList);
