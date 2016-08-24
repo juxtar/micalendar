@@ -85,6 +85,7 @@ factory("scheduler", function(){
 
 	function getTimes(list){
 		var timeList = new Set();
+		timeList.add("09:00");
 
 		for (var i=0; i<list.length; i++){
 			if(list[i].name){
