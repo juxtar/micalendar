@@ -5,6 +5,23 @@ factory("scheduler", function(){
 	//  ------------ FUNCIONES AUXILIARES PARA LOGICAS DE ORDENAMIENTO: ------------
 	//  ------------ -------------------------------------------------- ------------
 
+  function parseSchedules(activityList){
+    var parsedActivities = [];
+    for(var i=0; i<activityList.length; i++){
+      for(var j=0; j<activityList[i].schedule.length; j++){
+        var newActivity = {
+          name: activityList[i].name,
+          day: activityList[i].schedule[j].day,
+          timeInit: activityList[i].schedule[j].timeInit,
+          timeEnd: activityList[i].schedule[j].timeEnd,
+          duration: substractTimestamps(activityList[i].schedule[j].timeInit,
+                                 activityList[i].schedule[j].timeEnd)
+        };
+        parsedActivities.push(newActivity);
+      }
+    }
+    return parsedActivities;
+  }
 
 	// FILTRAR POR DIA
 	// Para usar: var filtrados = actividades.filter(dayFilter("Martes"));
@@ -57,7 +74,7 @@ factory("scheduler", function(){
 	}
 
 
-	function restaTiempos (inicial, final) {
+	function substractTimestamps(inicial, final) {
 	    var horasInicial = inicial.split(":")[0];
 	    var minutosInicial = inicial.split(":")[1];
 	    var horasFinal = final.split(":")[0];
@@ -72,7 +89,7 @@ factory("scheduler", function(){
 	    this.day = "";
 	    this.timeInit = init;
 	    this.timeEnd = end;
-	    this.duration = restaTiempos(init, end)
+	    this.duration = substractTimestamps(init, end)
 	    this.collision = col;
 	}
 
@@ -128,11 +145,11 @@ factory("scheduler", function(){
 	//  ------------ FUNCIONES PARA LOGICAS DE ORDENAMIENTO: ---------- ------------
 	//  ------------ -------------------------------------------------- ------------
 
-	function filterNoCollision(list){
+	function filterNoCollision(list, parsedList){
 	    var sortedActivities = [];
 	    if(!list[0].collision){
-	        if(list[0].timeInit != getLastTime(ordenadas)){ // Tiempo libre entre ultima actividad en ordenadas y list[0] -> agregar actividad vacia
-	            var blank = new Blank(getLastTime(ordenadas), list[0].timeInit, false);
+	        if(list[0].timeInit != getLastTime(parsedList)){ // Tiempo libre entre ultima actividad en ordenadas y list[0] -> agregar actividad vacia
+	            var blank = new Blank(getLastTime(parsedList), list[0].timeInit, false);
 	            sortedActivities.push(blank);
 	        }
 	        sortedActivities.push(list[0]);
@@ -142,15 +159,12 @@ factory("scheduler", function(){
 	}
 
 
-	function filterWithCollision(list){
-	    var sortedActivities = []; // MOVERLO DENTRO DEL IF?
-
+	function filterWithCollision(list, parsedList){
 	    if(list[0].collision){
 	        
-	        
-	        if(list[0].timeInit != getLastTime(ordenadas)){ // Tiempo libre entre ultima actividad en ordenadas y list[0] -> agregar actividad vacia
-	            var blank = new Blank(getLastTime(ordenadas), list[0].timeInit, false);
-	            ordenadas.push(blank);
+	        if(list[0].timeInit != getLastTime(parsedList)){ // Tiempo libre entre ultima actividad en ordenadas y list[0] -> agregar actividad vacia
+	            var blank = new Blank(getLastTime(parsedList), list[0].timeInit, false);
+	            parsedList.push(blank);
 	        }
 
 
@@ -172,7 +186,7 @@ factory("scheduler", function(){
 	                    var done = false;
 	                    if(list[0].timeInit >= block[i][block[i].length -1].timeEnd ) { // NO hay colision en esta columna
 
-	                        if(restaTiempos(block[i][block[i].length-1].timeEnd, list[0].timeInit) > 0) { // Agrega el tiempo libre entre el fin de la ultima actividad de la columna y la actividad nueva a agregar
+	                        if(substractTimestamps(block[i][block[i].length-1].timeEnd, list[0].timeInit) > 0) { // Agrega el tiempo libre entre el fin de la ultima actividad de la columna y la actividad nueva a agregar
 	                            var actEmpty = new Blank(block[i][block[i].length-1].timeEnd, list[0].timeInit, true);
 	                            block[i].push(actEmpty);
 	                        }
@@ -199,15 +213,12 @@ factory("scheduler", function(){
 	        }
 
 
-	        var blockActividadesConColision = {
+	        var blockWithCollisions = {
 	                collision: true,
 	                activities: block
 	        }
-	        completeBlock(blockActividadesConColision.activities);
-	        sortedActivities.push(blockActividadesConColision);
-	        
-
-	        return sortedActivities;
+	        completeBlock(blockWithCollisions.activities);
+	        return blockWithCollisions;
 	    }
 	}
 
@@ -215,11 +226,12 @@ factory("scheduler", function(){
 
 		var parsedList = [];
 
-		var auxList = activityList.filter(dayFilter(day)).sort(timeSort);
+		var auxList = parseSchedules(activityList);
+    auxList = auxList.filter(dayFilter(day)).sort(timeSort);
 		auxList.forEach(isColliding);
 		while(auxList.length){
 
-		    var temp = filterNoCollision(auxList);
+		    var temp = filterNoCollision(auxList, parsedList);
 		    for(var j = 0; j < temp.length; j++){ // usamos este loop porque el concat no esta funcionando
 		        parsedList.push(temp[j]);
 		    }
@@ -228,7 +240,7 @@ factory("scheduler", function(){
 		        break;
 		    }
 
-		    var withCollision = filterWithCollision(auxList);
+		    var withCollision = filterWithCollision(auxList, parsedList);
 		    if(!(withCollision == null)){ // porque 'undefined' == null es true
 		        parsedList.push(withCollision);
 		    }

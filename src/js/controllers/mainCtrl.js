@@ -1,5 +1,5 @@
 angular.module("miCalendar").
-controller("mainCtrl", function($scope, $mdSidenav){
+controller("mainCtrl", function($scope, $mdSidenav, scheduler){
     
     $scope.showToolbar = function(){
         $mdSidenav("left").toggle();
@@ -12,48 +12,6 @@ controller("mainCtrl", function($scope, $mdSidenav){
     
     $scope.currentDay = "Miércoles";
     $scope.days = ["Lunes",  "Martes",  "Miércoles",  "Jueves",  "Viernes"];
-    $scope.prueba = [
-      {
-        name: "",
-        duration: 5,
-        collision: false
-      },
-      {
-        name: "Métodos Ágiles",
-        duration: 1.5,
-        collision: false
-      },
-      {
-        name: "",
-        duration: 1.75,
-        collision: false
-      },
-      {
-        collision: true,
-        activities: [
-          [
-            {
-              name: "Teoría de Control",
-              duration: 2.5
-            },
-            {
-              name: "",
-              duration: 1.5
-            }
-          ],
-          [
-            {
-              name: "",
-              duration: 0.75
-            },
-            {
-              name: "Redes de Información",
-              duration: 3.25
-            }
-          ]
-        ]
-      },
-    ]
 
     $scope.tiemposprueba = [
         {
@@ -85,4 +43,54 @@ controller("mainCtrl", function($scope, $mdSidenav){
             duration: 1.5
         },
     ]
+    
+    var prueba = [
+        {
+            name: "Métodos Ágiles",
+            schedule: [
+                {
+                    day: 3,
+                    timeInit: "14:00",
+                    timeEnd: "15:30"
+                },
+                {
+                    day: 5,
+                    timeInit: "14:45",
+                    timeEnd: "16:15"
+                }
+            ]
+        },
+        {
+            name: "Teoría de Control",
+            schedule: [
+                {
+                    day: 1,
+                    timeInit: "19:00",
+                    timeEnd: "21:15"
+                },
+                {
+                    day: 3,
+                    timeInit: "17:15",
+                    timeEnd: "19:45"
+                }
+            ]
+        },
+        {
+            name: "Redes de Información",
+            schedule: [
+                {
+                    day: 3,
+                    timeInit: "18:00",
+                    timeEnd: "21:15"
+                },
+                {
+                    day: 4,
+                    timeInit: "15:30",
+                    timeEnd: "18:45"
+                }
+            ]
+        }
+    ];
+  
+    $scope.prueba = scheduler(prueba, 5);
 })
