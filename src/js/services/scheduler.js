@@ -129,15 +129,6 @@ factory("scheduler", function(){
 	    if(parseInt(list.length)){
 	        var lastAct = list[list.length -1];
 
-	        try{
-	            lastAct.timeEnd.split(":")[0]; // <--- va a dar error si lastAct es un block
-	        }
-	        catch(err){
-	            if(lastAct[0].collision){
-	                return lastAct[0].activities[0][lastAct[0].activities[0].length -1].timeEnd;
-	            }
-	        }
-
 	        if (lastAct.collision) {  // Ejecuta para las actividades que no colisionan 
 	            return lastAct.activities[0][lastAct.activities[0].length -1].timeEnd;
 	        }
