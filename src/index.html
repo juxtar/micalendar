@@ -42,12 +42,12 @@
         </md-button>
         <md-menu md-offset="0 0">
           <h2 class="day-tag" ng-click="openMenu($mdOpenMenu, $event)">
-            {{ currentDay }}
+            {{ days[currentDay-1] }}
             <md-icon md-font-set="material-icons" md-menu-align-target>arrow_drop_down</md-icon>
           </h2>
           <md-menu-content width="3">
             <md-menu-item ng-repeat="day in days">
-              <md-button ng-disabled="currentDay == day">{{ day }}</md-button>
+              <md-button ng-disabled="currentDay == $index+1" ng-click="loadActivities($index+1)">{{ day }}</md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -72,8 +72,8 @@
 
     <md-content flex>
       <div class="contenedor">
-        <time-column info="tiemposprueba"></time-column>
-        <activity-column info="prueba"></activity-column>
+        <time-column info="activityTimes"></time-column>
+        <activity-column info="activityBlocks"></activity-column>
       </div>
       <md-button class="md-fab add-button" aria-label="Eat cake">
         <md-icon md-font-set="material-icons">add</md-icon>

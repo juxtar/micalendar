@@ -10,41 +10,17 @@ controller("mainCtrl", function($scope, $mdSidenav, scheduler){
         $mdOpenMenu(ev);
     };
     
-    $scope.currentDay = "Miércoles";
     $scope.days = ["Lunes",  "Martes",  "Miércoles",  "Jueves",  "Viernes"];
-
-    $scope.tiemposprueba = [
-        {
-            label: "9:00",
-            duration: 0
-        },
-        {
-            label: "14:00",
-            duration: 5
-        },
-        {
-            label: "15:30",
-            duration: 1.5
-        },
-        {
-            label: "17:15",
-            duration: 1.75
-        },
-        {
-            label: "18:00",
-            duration: 0.75
-        },
-        {
-            label: "19:45",
-            duration: 1.75
-        },
-        {
-            label: "21:15",
-            duration: 1.5
-        },
-    ]
     
-    var prueba = [
+    $scope.loadActivities = function(day){
+        $scope.currentDay = day || (new Date()).getDay();
+
+        var result = scheduler(colo, $scope.currentDay);
+        $scope.activityTimes = result[0];
+        $scope.activityBlocks = result[1];
+    };
+
+    var colo = [
         {
             name: "Métodos Ágiles",
             schedule: [
@@ -89,8 +65,48 @@ controller("mainCtrl", function($scope, $mdSidenav, scheduler){
                     timeEnd: "18:45"
                 }
             ]
+        },
+        {
+            name: "Ingeniería de Software",
+            schedule: [
+                {
+                    day: 2,
+                    timeInit: "16:30",
+                    timeEnd: "18:45"
+                },
+                {
+                    day: 5,
+                    timeInit: "17:15",
+                    timeEnd: "19:45"
+                }
+            ]
+        },
+        {
+            name: "Aplicaciones Móviles",
+            schedule: [
+                {
+                    day: 2,
+                    timeInit: "19:45",
+                    timeEnd: "22:15"
+                },
+                {
+                    day: 4,
+                    timeInit: "19:45",
+                    timeEnd: "22:15"
+                }
+            ]
+        },
+        {
+            name: "Administración de Recursos",
+            schedule: [
+                {
+                    day: 4,
+                    timeInit: "14:45",
+                    timeEnd: "19:45"
+                }
+            ]
         }
     ];
-  
-    $scope.prueba = scheduler(prueba, 5);
+    
+    $scope.loadActivities();
 })

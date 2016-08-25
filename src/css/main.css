@@ -12,8 +12,8 @@
 
 .add-button {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 16px;
+  bottom: 16px;
 }
 
 /*
@@ -72,4 +72,11 @@
   background: url(../img/nada.png);
   border-radius: 0;
   border: white 1px solid;
+}
+
+@media (min-width:768px) {
+  .add-button {
+    right: 24px;
+    bottom: 24px;
+  }
 }
