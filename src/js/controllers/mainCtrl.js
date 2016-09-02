@@ -1,5 +1,20 @@
 angular.module("miCalendar").
-controller("mainCtrl", function($scope, $mdSidenav, scheduler){
+controller("mainCtrl", function($scope, $mdSidenav, $mdDialog, scheduler){
+    $scope.showNewActivity = function(ev) {
+        $mdDialog.show({
+            controller: 'newActivityCtrl',
+            templateUrl: 'templates/newActivityDialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: false,
+            fullscreen: true
+        })
+        .then(function(answer) {
+            
+        }, function() {
+            
+        });
+    };
     
     $scope.showToolbar = function(){
         $mdSidenav("left").toggle();

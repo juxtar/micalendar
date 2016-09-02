@@ -74,6 +74,30 @@
   border: white 1px solid;
 }
 
+/*
+======= Dialog =======
+*/
+
+.schedule-tag-container {
+    position: relative;
+}
+
+.delete-button {
+    position: absolute;
+    right: 16px;
+    top: -8px;
+}
+
+.days-error {
+    font-size: 12px;
+    line-height: 14px;
+    color: rgb(221,44,0);
+}
+
+/*
+======= Media Queries =======
+*/
+
 @media (min-width:768px) {
   .add-button {
     right: 24px;

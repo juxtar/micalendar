@@ -1,0 +1,46 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form name="newActivityForm" ng-cloak layout="column">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button hide-gt-sm class="md-icon-button" aria-label="Atrás" ng-click="hide()">
+          <i class="material-icons">arrow_back</i>
+        </md-button>
+        <h2>Nueva Actividad</h2>
+        <span flex></span>
+        <md-button hide show-gt-sm class="md-icon-button" ng-click="cancel()">
+          <md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content" id="new-activity-content">
+        <md-input-container class="md-block">
+          <label>Nombre</label>
+          <input md-maxlength="40" required md-no-asterisk ng-model="activity.name" name="title">
+          <div ng-messages="newActivityForm.title.$error">
+            <div ng-message="required">Este campo es obligatorio.</div>
+            <div ng-message="md-maxlength">El nombre no puede contener más de 40 caracteres.</div>
+          </div>
+        </md-input-container>
+        <div id="schedule-forms">
+          <schedule-form id="primero"></schedule-form>
+        </div>
+        <md-button class="md-fab md-mini" aria-label="Nuevo Horario" ng-click="addScheduleForm()">
+          <md-tooltip md-direction="top">
+            Otro Horario
+          </md-tooltip>
+          <md-icon md-font-set="material-icons">add</md-icon>
+        </md-button>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-primary" ng-click="cancel()">
+       Descartar
+      </md-button>
+      <md-button class="md-primary" ng-click="submit()" ng-disabled="newActivityForm.$invalid">
+       Guardar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

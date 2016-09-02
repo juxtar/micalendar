@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <link rel="stylesheet" href="css/mdPickers.min.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body ng-app="miCalendar" layout="column" layout-fill ng-cloak ng-controller="mainCtrl">
@@ -75,27 +76,35 @@
         <time-column info="activityTimes"></time-column>
         <activity-column info="activityBlocks"></activity-column>
       </div>
-      <md-button class="md-fab add-button" aria-label="Eat cake">
+      <md-button class="md-fab add-button" aria-label="Nueva Actividad" ng-click="showNewActivity()">
+        <md-tooltip md-direction="left">
+          Nueva Actividad
+        </md-tooltip>
         <md-icon md-font-set="material-icons">add</md-icon>
       </md-button>
     </md-content>
     
     <!--  Vendor Scripts  -->
-    <script src="js/vendor/jquery-3.1.0.js"></script>
-    <script src="js/vendor/angular.js"></script>
-    <script src="js/vendor/angular-animate.js" type="text/javascript" ></script>
-    <script src="js/vendor/angular-aria.js" type="text/javascript" ></script>
+    <script src="js/vendor/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="js/vendor/angular.js" type="text/javascript"></script>
+    <script src="js/vendor/angular-animate.min.js" type="text/javascript"></script>
+    <script src="js/vendor/angular-aria.min.js" type="text/javascript"></script>
+    <script src="js/vendor/angular-messages.min.js" type="text/javascript"></script>
     <script src="js/vendor/angular-material.js" type="text/javascript" ></script>
+    <script src="js/vendor/moment.min.js" type="text/javascript"></script>
+    <script src="js/vendor/mdPickers.min.js" type="text/javascript"></script>
     <!--  App  -->
-    <script src="js/app.js"></script>
+    <script src="js/app.js" type="text/javascript"></script>
     <!--  Services  -->
-    <script src="js/services/scheduler.js"></script>
+    <script src="js/services/scheduler.js" type="text/javascript"></script>
     <!--  Controllers  -->
-    <script src="js/controllers/mainCtrl.js"></script>
+    <script src="js/controllers/mainCtrl.js" type="text/javascript"></script>
+    <script src="js/controllers/newActivityCtrl.js" type="text/javascript"></script>
     <!--  Directives  -->
-    <script src="js/directives/activity.js"></script>
-    <script src="js/directives/timeStamp.js"></script>
-    <script src="js/directives/activityColumn.js"></script>
-    <script src="js/directives/timeColumn.js"></script>
+    <script src="js/directives/activity.js" type="text/javascript"></script>
+    <script src="js/directives/timeStamp.js" type="text/javascript"></script>
+    <script src="js/directives/activityColumn.js" type="text/javascript"></script>
+    <script src="js/directives/timeColumn.js" type="text/javascript"></script>
+    <script src="js/directives/scheduleForm.js" type="text/javascript"></script>
   </body>
 </html>

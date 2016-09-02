@@ -1,0 +1,27 @@
+<ng-form name="scheduleForm">
+  <div class="schedule-tag-container">
+    <h4 class="md-subhead">Horario:</h4>
+    <md-button ng-if="num" class="md-icon-button delete-button" aria-label="Eliminar Horario" ng-click="removeScheduleForm(num)">
+      <md-icon md-font-set="material-icons" md-menu-align-target>delete</md-icon>
+    </md-button>
+  </div>
+  <input type="hidden" name="days" ng-model="dayscheck">
+  <md-checkbox ng-repeat="day in days" ng-checked="exists($index+1, selected[num])" ng-click="toggle($index+1, selected[num])">{{ day }}</md-checkbox>
+  <div ng-messages="scheduleForm.days.$error">
+    <div ng-message="required" class="days-error">Debe seleccionar al menos un día.</div>
+  </div>
+  <div flex layout="row">
+    <mdp-time-picker mdp-placeholder="Hora de inicio" name="timeInit" ng-model="timeInit[num]" required mdp-auto-switch="true" mdp-format="HH:mm" aria-label="Initial time">
+      <div ng-messages="scheduleForm.timeInit.$error">
+        <div ng-message="required">Este campo es obligatorio.</div>
+        <div ng-message="format">Formato inválido.</div>
+      </div>
+    </mdp-time-picker>
+    <mdp-time-picker mdp-placeholder="Hora de finalización" name="timeEnd" ng-model="timeEnd[num]" required mdp-auto-switch="true" mdp-format="HH:mm" aria-label="Final time">
+      <div ng-messages="scheduleForm.timeEnd.$error">
+        <div ng-message="required">Este campo es obligatorio.</div>
+        <div ng-message="format">Formato inválido.</div>
+      </div>
+    </mdp-time-picker>
+  </div>
+</ng-form>
